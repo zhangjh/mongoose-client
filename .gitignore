@@ -8,6 +8,5 @@
 out
 gen
 .idea/
-lib/
 node_modules/
 package-lock.json
