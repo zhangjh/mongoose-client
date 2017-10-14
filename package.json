@@ -1,8 +1,8 @@
 {
   "name": "mongoose-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A mongoose client to make mongo CRUD convenient.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "babel": "babel src -d lib --copy-files"
   },
