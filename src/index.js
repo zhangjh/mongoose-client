@@ -101,7 +101,7 @@ let remove = function(collection,removeCondition,callback){
   });
 };
 
-exports.mongooseClient = {
+module.exports = {
   insert,
   update,
   remove,
