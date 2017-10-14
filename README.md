@@ -14,7 +14,7 @@
  var mongooseClient = require("mongoose-client");
  ```
  
- ##3. Use it
+ ## 3. Use it
  ```
  insert:
  mongooseClient.insert(collection,data,callback);
