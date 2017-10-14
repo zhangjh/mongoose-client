@@ -1,6 +1,6 @@
 {
   "name": "mongoose-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A mongoose client to make mongo CRUD convenient.",
   "main": "index.js",
   "scripts": {
