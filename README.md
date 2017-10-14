@@ -5,26 +5,45 @@
  npm install mongoose-client
  
  # Usage 
- ## 1. Make config
- First, you must modify the configuration to your owns.
- Open conf/config to modify the default configuration.
  
- ## 2. require mongoose-client
+ ## 1. require mongoose-client
  ```
  var mongooseClient = require("mongoose-client");
+ ```
+ ## 2. Modify config
+ You must modify the configuration to your owns.
+ So you can do it like this:
+ ```js
+    var mongooseClientInstance = new mongooseClient({
+      DB_IP: "xxx",
+      DB_PORT: "xxx",
+      DB_NAME: "xxx",
+      schema: {
+        collection1: {
+          key1: {type: String},
+          key2: {type: String}
+        },
+        collection2: {
+          key1: {type: String},
+          key2: {type: JSON},
+          key3: {type: Array}
+        },
+        ... 
+      }
+    });
  ```
  
  ## 3. Use it
  ```
  insert:
- mongooseClient.insert(collection,data,callback);
+ mongooseClientInstance.insert(collection,data,callback);
  
  remove:
- mongooseClient.remove(collection,removeCondition,callback);
+ mongooseClientInstance.remove(collection,removeCondition,callback);
  
  update:
- mongooseClient.update(collection,updateCondition,update,options,callback);
+ mongooseClientInstance.update(collection,updateCondition,update,options,callback);
  
  find:
- mongooseClient.find(collection,findPattern,callback);
+ mongooseClientInstance.find(collection,findPattern,callback);
  ```
