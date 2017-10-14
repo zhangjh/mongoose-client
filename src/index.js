@@ -41,7 +41,7 @@ function connect(collection,cb){
 }
 
 //insert
-exports.insert = function(collection,data,callback){
+let insert = function(collection,data,callback){
   connect(collection,function(db,tableModel){
     let mongoEntity = new tableModel(data);
     mongoEntity.save(function(e){
@@ -53,7 +53,7 @@ exports.insert = function(collection,data,callback){
 };
 
 //find
-exports.find = function(collection,findPattern,callback){
+let find = function(collection,findPattern,callback){
   connect(collection,function(db,tableModel){
     tableModel.find(findPattern).exec(function(e,res){
       db.close();
@@ -64,7 +64,7 @@ exports.find = function(collection,findPattern,callback){
 };
 
 //update
-exports.update = function(collection,updateCondition,update,options,callback){
+let update = function(collection,updateCondition,update,options,callback){
   connect(collection,function(db,tableModel){
     tableModel.find(updateCondition,function(e,res){
       if(e){
@@ -83,7 +83,7 @@ exports.update = function(collection,updateCondition,update,options,callback){
 };
 
 //remove
-exports.remove = function(collection,removeCondition,callback){
+let remove = function(collection,removeCondition,callback){
   connect(collection,function(db,tableModel){
     tableModel.find(removeCondition,function(e,res){
       if(e){
@@ -99,4 +99,11 @@ exports.remove = function(collection,removeCondition,callback){
       callback({status: false, msg: "Remove error: No this data exist."});
     });
   });
+};
+
+exports.mongooseClient = {
+  insert,
+  update,
+  remove,
+  find
 };
