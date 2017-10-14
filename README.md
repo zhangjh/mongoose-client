@@ -1,11 +1,10 @@
-# mongoose-client
+ # mongoose-client
  A mongoose client to make mongo CRUD convenient.
  
  # Install 
- npm install mongoose-client
+ `npm install mongoose-client`
  
  # Usage 
- 
  ## 1. require mongoose-client
  ```
  var mongooseClient = require("mongoose-client");
@@ -34,16 +33,16 @@
  ```
  
  ## 3. Use it
- ```
- insert:
+ ```js
+ // insert:
  mongooseClientInstance.insert(collection,data,callback);
  
- remove:
+ // remove:
  mongooseClientInstance.remove(collection,removeCondition,callback);
  
- update:
+ // update:
  mongooseClientInstance.update(collection,updateCondition,update,options,callback);
  
- find:
+ // find:
  mongooseClientInstance.find(collection,findPattern,callback);
  ```
