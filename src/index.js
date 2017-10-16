@@ -78,6 +78,7 @@ let mongooseClient = function (params) {
       tableModel.find(updateCondition,function(e,res){
         if(e){
           callback({status: false,msg: e});
+          return;
         }
         if(res){
           tableModel.update(updateCondition,update,options,function(e){
@@ -85,6 +86,7 @@ let mongooseClient = function (params) {
             if(e)callback({status: false, msg: e});
             else callback({status: true});
           });
+          return;
         }
         callback({status: false, msg: "Update error: No this data exist."});
       });
@@ -97,6 +99,7 @@ let mongooseClient = function (params) {
       tableModel.find(removeCondition,function(e,res){
         if(e){
           callback({status: false,msg: e});
+          return;
         }
         if(res){
           tableModel.remove(removeCondition,function(e){
@@ -104,6 +107,7 @@ let mongooseClient = function (params) {
             if(e)callback({status: false, msg: e});
             else callback({status: true});
           });
+          return;
         }
         callback({status: false, msg: "Remove error: No this data exist."});
       });
