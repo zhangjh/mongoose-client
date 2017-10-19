@@ -5,7 +5,7 @@
  * Ver£º1.0
  * */
 import mongoose from 'mongoose';
-import conf from  '../conf/conf';
+import conf from '../conf/conf';
 
 let mongooseClient = function (params) {
   this.DB_IP = params.DB_IP || conf.db.DB_IP;
@@ -22,8 +22,8 @@ let mongooseClient = function (params) {
 
   //define schema
   this.defineSchema = function (collection) {
-    for(let key in this.schema){
-      if(this.schema.hasOwnProperty(key) && key === collection){
+    for (let key in this.schema) {
+      if (this.schema.hasOwnProperty(key) && key === collection) {
         return new mongoose.Schema(this.schema[key]);
       }
     }
@@ -33,57 +33,68 @@ let mongooseClient = function (params) {
   this.connect = function (collection, cb) {
     let _this = this;
     let db = mongoose.createConnection(this.getDBURL());
-    db.on('error',function(e){
+    db.on('error', function (e) {
       return console.error(e);
     });
 
-    db.once('open',function(){
+    db.once('open', function () {
       let tableSchema = _this.defineSchema(collection);
       // deploy schema to model
-      let tableModel = db.model(collection,tableSchema);
-      if(!db.model(collection)){
+      let tableModel = db.model(collection, tableSchema);
+      if (!db.model(collection)) {
         return console.error("model list deploy failed!");
       }
 
-      if(cb)cb(db,tableModel);
+      if (cb) cb(db, tableModel);
     });
   };
 
   //insert
   this.insert = function (collection, data, callback) {
-    this.connect(collection,function(db,tableModel){
+    this.connect(collection, function (db, tableModel) {
       let mongoEntity = new tableModel(data);
-      mongoEntity.save(function(e){
+      mongoEntity.save(function (e) {
         db.close();
-        if(e)callback({status: false, msg: e});
+        if (e) callback({status: false, msg: e});
         else callback({status: true});
       });
     });
   };
 
   //find
-  this.find = function(collection,findPattern,callback){
-    this.connect(collection,function(db,tableModel){
-      tableModel.find(findPattern).exec(function(e,res){
+  this.find = function (collection, findPattern, callback) {
+    this.connect(collection, function (db, tableModel) {
+      tableModel.find(findPattern).exec(function (e, res) {
         db.close();
-        if(e)callback({status: false, msg: e});
+        if (e) callback({status: false, msg: e});
         else callback({status: true, data: res});
       });
     });
   };
 
+  // findBatch
+  this.findBatch = function (collection, findPattern, callback) {
+    this.connect(collection, function (db, tableModel) {
+      tableModel.find({}).where(findPattern).exec(function (e, res) {
+        db.close();
+        if (e) callback({status: false, msg: e});
+        else callback({status: true, data: res});
+      });
+    })
+  };
+
   //update
-  this.update = function(collection,updateCondition,update,options,callback){
-    this.connect(collection,function(db,tableModel){
-      tableModel.find(updateCondition,function(e,res){
-        if(e){
-          callback({status: false,msg: e});
+  this.update = function (collection, updateCondition, update, options, callback) {
+    this.connect(collection, function (db, tableModel) {
+      tableModel.find(updateCondition, function (e, res) {
+        if (e) {
+          callback({status: false, msg: e});
           return;
         }
-        if(res){
-          tableModel.update(updateCondition,update,options,function(e){
+        if (res) {
+          tableModel.update(updateCondition, update, options, function (e) {
             db.close();
-            if(e)callback({status: false, msg: e});
+            if (e) callback({status: false, msg: e});
             else callback({status: true});
           });
           return;
@@ -94,17 +105,17 @@ let mongooseClient = function (params) {
   };
 
   //remove
-  this.remove = function(collection,removeCondition,callback){
-    this.connect(collection,function(db,tableModel){
-      tableModel.find(removeCondition,function(e,res){
-        if(e){
-          callback({status: false,msg: e});
+  this.remove = function (collection, removeCondition, callback) {
+    this.connect(collection, function (db, tableModel) {
+      tableModel.find(removeCondition, function (e, res) {
+        if (e) {
+          callback({status: false, msg: e});
           return;
         }
-        if(res){
-          tableModel.remove(removeCondition,function(e){
+        if (res) {
+          tableModel.remove(removeCondition, function (e) {
             db.close();
-            if(e)callback({status: false, msg: e});
+            if (e) callback({status: false, msg: e});
             else callback({status: true});
           });
           return;

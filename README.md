@@ -45,4 +45,7 @@
  
  // find:
  mongooseClientInstance.find(collection,findPattern,callback);
+ 
+ // find batch:(findPatern can be regular expression)
+  mongooseClientInstance.findBatch(collection,findPattern,callback);
  ```
