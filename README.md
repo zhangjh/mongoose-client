@@ -51,8 +51,8 @@
 
 All callbacks return result as:
 {
-	success: true/false,
-	data: xxx,              // if success is true
-	msg: xxx		        // if success is false
+	status: true/false,
+	data: xxx,              // if status is true
+	msg: xxx		        // if status is false
 }	
  ```
