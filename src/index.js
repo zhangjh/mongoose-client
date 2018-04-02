@@ -63,6 +63,7 @@ let mongooseClient = function (params) {
 
   //find
   this.find = function (collection, findPattern, sortMode, callback) {
+    if(!sortMode){sortMode = {};}
     this.connect(collection, function (db, tableModel) {
       tableModel.find(findPattern).sort(sortMode).exec(function (e, res) {
         db.close();
@@ -74,6 +75,7 @@ let mongooseClient = function (params) {
 
   // findBatch
   this.findBatch = function (collection, findPattern, sortMode, callback) {
+    if(!sortMode){sortMode = {};}
     this.connect(collection, function (db, tableModel) {
       tableModel.find({}).where(findPattern).sort(sortMode).exec(function (e, res) {
         db.close();
