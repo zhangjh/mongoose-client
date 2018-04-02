@@ -1,8 +1,8 @@
 /*
- * Des£ºmongoose-client to make mongodb CRUD more convenient.
- * Author£ºnjhxzhangjh@gmail.com
- * Date£º10/14/2017
- * Ver£º1.0
+ * DesÂ£Âºmongoose-client to make mongodb CRUD more convenient.
+ * AuthorÂ£Âºnjhxzhangjh@gmail.com
+ * DateÂ£Âº10/14/2017
+ * VerÂ£Âº1.0
  * */
 import mongoose from 'mongoose';
 import conf from '../conf/conf';
@@ -62,9 +62,9 @@ let mongooseClient = function (params) {
   };
 
   //find
-  this.find = function (collection, findPattern, callback) {
+  this.find = function (collection, findPattern, sortMode, callback) {
     this.connect(collection, function (db, tableModel) {
-      tableModel.find(findPattern).exec(function (e, res) {
+      tableModel.find(findPattern).sort(sortMode).exec(function (e, res) {
         db.close();
         if (e) callback({status: false, msg: e});
         else callback({status: true, data: res});
@@ -73,9 +73,9 @@ let mongooseClient = function (params) {
   };
 
   // findBatch
-  this.findBatch = function (collection, findPattern, callback) {
+  this.findBatch = function (collection, findPattern, sortMode, callback) {
     this.connect(collection, function (db, tableModel) {
-      tableModel.find({}).where(findPattern).exec(function (e, res) {
+      tableModel.find({}).where(findPattern).sort(sortMode).exec(function (e, res) {
         db.close();
         if (e) callback({status: false, msg: e});
         else callback({status: true, data: res});
