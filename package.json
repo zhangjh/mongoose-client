@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zhangjh/mongoose-client#readme",
   "dependencies": {
-    "mongoose": "^4.12.1"
+    "mongoose": "^5.7.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
